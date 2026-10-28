@@ -1,0 +1,90 @@
+export const meta = {
+  title: "Shipping a strict CSP in Next.js without 'unsafe-inline'",
+  summary:
+    "How this site gets a nonce-based Content Security Policy, why 'strict-dynamic' matters, and the one exception I had to make. Also a tour of every MDX feature this blog supports.",
+  date: "2026-10-20",
+  tags: ["AppSec", "Next.js", "CSP"],
+};
+
+A Content Security Policy is the last line of defence against cross-site scripting: even if an
+attacker gets markup into your page, the browser refuses to run their script. This post walks
+through the policy on this site. It doubles as a reference for the formatting the blog supports
+(**bold**, *italics*, `inline code`, [internal links](/security) and
+[external links](https://developer.mozilla.org/docs/Web/HTTP/CSP)).
+
+## Why allowlists aren't enough
+
+Early CSPs listed trusted domains:
+
+```http
+Content-Security-Policy: script-src 'self' https://cdn.example.com
+```
+
+Research from Google showed most allowlist-based policies were bypassable, often because an
+allowed CDN hosted a JSONP endpoint or an old Angular build an attacker could abuse.
+
+<Callout type="tip" title="Key idea">
+  Instead of trusting *where* a script comes from, trust *who put it on the page*. A nonce proves
+  the server wrote the tag.
+</Callout>
+
+## Generating a nonce per request
+
+The nonce must be unpredictable and different on every response. In Next.js 16 that happens in
+`proxy.ts`:
+
+```ts title="src/proxy.ts" {3,4}
+export function proxy(request: NextRequest) {
+  // 128 bits from the Web Crypto CSPRNG
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  const nonce = btoa(String.fromCharCode(...bytes));
+  const csp = buildCsp(nonce);
+  // …set it on the request (for rendering) and the response (for the browser)
+}
+```
+
+Next.js reads the nonce from the request header and stamps it onto every framework script.
+
+### The resulting policy
+
+| Directive | Value | Why |
+| --- | --- | --- |
+| `script-src` | `'nonce-…' 'strict-dynamic'` | Only server-issued scripts and what they load |
+| `object-src` | `'none'` | No plugins, ever |
+| `base-uri` | `'none'` | Stops `<base>` hijacking of relative URLs |
+| `frame-ancestors` | `'none'` | Clickjacking protection |
+
+## The trade-off: no more static pages
+
+A nonce has to change on every response, so pages can't be pre-rendered once and cached at
+the CDN. On a content site the cost is small: MDX is still compiled at build time, so each
+request only renders a cheap React tree.
+
+<Callout type="warning">
+  If you copy this approach, measure your Time to First Byte. For a high-traffic site, consider
+  hash-based CSP with Subresource Integrity instead.
+</Callout>
+
+## The one exception
+
+Build-time syntax highlighting (like the blocks above) emits `style="…"` attributes. A nonce
+can't cover attributes, so the policy allows `style-src-attr 'unsafe-inline'`. Style attributes
+can't execute JavaScript, and `<style>` *elements* still require the nonce.
+
+## Checking your own site
+
+1. Open DevTools → Network, select the document, and read the `Content-Security-Policy` header.
+2. Paste it into Google's [CSP Evaluator](https://csp-evaluator.withgoogle.com/).
+3. Run [securityheaders.com](https://securityheaders.com) against the deployed URL.
+
+```bash
+curl -sI https://your-domain.dev | grep -i content-security-policy
+```
+
+![Placeholder diagram of the nonce flow from proxy to browser](/images/blog/csp-nonce-flow.svg)
+
+---
+
+> Security headers don't fix vulnerable code, but they make exploitation dramatically harder.
+
+That's the whole setup. The full list of headers is on the [security page](/security).

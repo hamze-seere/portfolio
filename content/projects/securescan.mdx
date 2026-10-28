@@ -1,0 +1,102 @@
+export const meta = {
+  title: "SecureScan",
+  summary:
+    "A website security scanner that grades HTTP security headers, email authentication (SPF, DKIM, DMARC) and DNS hygiene, with shareable reports, PDF export and a GitHub Action.",
+  date: "2026-09-15",
+  tags: ["Security", "Web"],
+  status: "live",
+  featured: true,
+  role: "Solo — design, full-stack development, security research",
+  stack: ["Next.js", "TypeScript", "Tailwind CSS", "Node DNS APIs", "Vercel", "GitHub Actions"],
+  cover: { src: "/images/projects/securescan/cover.svg", alt: "SecureScan report showing a header grade and a list of findings" },
+  links: {
+    demo: "https://securescan.vercel.app",
+    github: "https://github.com/hamzeayuub-bot/securescan",
+  },
+};
+
+## Overview
+
+SecureScan takes a domain, runs a set of passive checks against it and returns a graded report
+that a developer can act on in minutes. It is aimed at small teams who don't have a security
+engineer but do have a website, a mail domain and a deadline.
+
+## Problem
+
+Most free scanners check one thing: headers *or* TLS *or* email. Developers end up juggling four
+tabs, and the results come back as jargon with no fix. I wanted one report that answers:
+*what's wrong, why it matters, and the exact config line that fixes it*.
+
+## My role
+
+I designed and built the whole product: check engine, UI, report sharing, PDF export and the
+CI integration. I also wrote the remediation guidance for every finding.
+
+## Tech stack
+
+- **Next.js (App Router) + TypeScript** — server-side scanning in route handlers, typed results end-to-end
+- **Node `dns/promises`** — TXT/MX/CAA lookups for SPF, DMARC and DKIM selectors
+- **Tailwind CSS** — report UI
+- **Vercel** — hosting, serverless functions
+- **GitHub Actions** — `securescan-action` fails a build when the grade drops below a threshold
+
+## Architecture
+
+<Figure
+  src="/images/projects/securescan/architecture.svg"
+  alt="Architecture: the browser calls a scan API, which fans out to header, DNS and email checkers, then stores a report that can be shared or exported to PDF."
+  caption="Request flow from scan submission to shareable report."
+/>
+
+A scan request is validated, then fanned out to independent checkers that run in parallel with
+per-check timeouts. Each checker returns typed findings (`pass | warn | fail`, evidence,
+remediation). A scoring module turns findings into a grade, and the report is stored under an
+unguessable ID so it can be shared.
+
+## Key features
+
+- **Security header analysis** — CSP (including `unsafe-inline` / wildcard detection), HSTS, framing, MIME sniffing, Referrer-Policy, Permissions-Policy, COOP/CORP
+- **Email security** — SPF syntax and lookup-count limits, DMARC policy strength, common DKIM selectors
+- **DNS checks** — CAA records, DNSSEC presence, dangling records
+- **Shareable report links** — read-only, unguessable IDs, expire after 30 days
+- **PDF export** — for sending to a client or manager
+- **GitHub Action** — run the scan on every deploy and fail CI on regressions
+
+## Challenges & how I solved them
+
+**Not becoming an SSRF proxy.** A scanner that fetches arbitrary URLs is a textbook SSRF target.
+Every target is resolved first, and requests to private, loopback, link-local and metadata
+ranges (e.g. `169.254.169.254`) are refused. Redirects are followed manually so each hop is
+re-validated.
+
+**Slow or hostile targets.** Some hosts never respond or stream forever. Each check has its own
+timeout and response-size cap, and the report renders partial results instead of failing.
+
+**Explaining findings to non-experts.** I wrote every remediation as a copy-pasteable snippet
+for the most common stacks (Nginx, Apache, Vercel, Next.js).
+
+## Security considerations
+
+- SSRF protection as described above, plus a strict scheme allowlist (`http`, `https`)
+- Input validated with zod; domains normalised with IDNA before lookup
+- Per-IP rate limiting on the scan endpoint
+- Report IDs are 128-bit random values; no enumeration
+- The app itself ships a nonce-based CSP and the same headers it checks for
+
+## Results
+
+<Figure
+  src="/images/projects/securescan/cover.svg"
+  alt="Sample SecureScan report (placeholder screenshot)"
+  caption="Replace with a real report screenshot."
+/>
+
+- Placeholder: *N scans run in the first month*
+- Placeholder: *Used in CI by X repositories*
+- Placeholder: *Feedback from a user / reviewer*
+
+## What I learned
+
+Building a security tool means your own app is held to a higher bar: if SecureScan had a weak
+CSP, nobody would trust its grades. I also learned how many real-world domains have SPF records
+that exceed the 10-lookup limit without anyone noticing.

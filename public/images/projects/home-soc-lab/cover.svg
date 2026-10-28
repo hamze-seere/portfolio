@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Home SOC Lab">
+  <rect width="1200" height="675" fill="#0f1620"/>
+  <g stroke="#2b394a" stroke-width="1" opacity=".5"><path d="M0 0V675"/><path d="M40 0V675"/><path d="M80 0V675"/><path d="M120 0V675"/><path d="M160 0V675"/><path d="M200 0V675"/><path d="M240 0V675"/><path d="M280 0V675"/><path d="M320 0V675"/><path d="M360 0V675"/><path d="M400 0V675"/><path d="M440 0V675"/><path d="M480 0V675"/><path d="M520 0V675"/><path d="M560 0V675"/><path d="M600 0V675"/><path d="M640 0V675"/><path d="M680 0V675"/><path d="M720 0V675"/><path d="M760 0V675"/><path d="M800 0V675"/><path d="M840 0V675"/><path d="M880 0V675"/><path d="M920 0V675"/><path d="M960 0V675"/><path d="M1000 0V675"/><path d="M1040 0V675"/><path d="M1080 0V675"/><path d="M1120 0V675"/><path d="M1160 0V675"/><path d="M0 0H1200"/><path d="M0 40H1200"/><path d="M0 80H1200"/><path d="M0 120H1200"/><path d="M0 160H1200"/><path d="M0 200H1200"/><path d="M0 240H1200"/><path d="M0 280H1200"/><path d="M0 320H1200"/><path d="M0 360H1200"/><path d="M0 400H1200"/><path d="M0 440H1200"/><path d="M0 480H1200"/><path d="M0 520H1200"/><path d="M0 560H1200"/><path d="M0 600H1200"/><path d="M0 640H1200"/></g>
+  <rect x="120" y="110" width="960" height="455" rx="16" fill="#17202b" stroke="#2b394a"/>
+  <circle cx="156" cy="146" r="7" fill="#f87171"/><circle cx="180" cy="146" r="7" fill="#fbbf24"/><circle cx="204" cy="146" r="7" fill="#5eead4"/>
+  <text x="170" y="250" fill="#fbbf24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="26">[alert] rule 100200 level 12 T1059.001</text>
+  <text x="170" y="320" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="64" font-weight="700">Home SOC Lab</text>
+  <text x="170" y="372" fill="#9aa8b6" font-family="system-ui, sans-serif" font-size="28">Wazuh · Sysmon · ATT&amp;CK simulations</text>
+  <rect x="170" y="420" width="420" height="14" rx="7" fill="#2b394a"/><rect x="170" y="420" width="300" height="14" rx="7" fill="#fbbf24"/>
+  <rect x="170" y="456" width="560" height="14" rx="7" fill="#2b394a"/>
+  <rect x="170" y="492" width="340" height="14" rx="7" fill="#2b394a"/>
+  <text x="1030" y="530" text-anchor="end" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">placeholder image</text>
+</svg>

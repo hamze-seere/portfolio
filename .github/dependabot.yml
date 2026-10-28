@@ -1,0 +1,26 @@
+# Dependency update strategy:
+# - Weekly checks keep the PR volume manageable.
+# - Minor/patch updates are grouped into one PR; majors arrive individually so breaking changes get reviewed.
+# - Security updates are raised immediately regardless of this schedule (enable "Dependabot security updates" in repo settings).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Africa/Nairobi
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    labels: [dependencies]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+    labels: [dependencies, ci]

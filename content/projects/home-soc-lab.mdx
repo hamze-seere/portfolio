@@ -1,0 +1,93 @@
+export const meta = {
+  title: "Home SOC Lab",
+  summary:
+    "A Wazuh-based security operations lab: endpoint agents, custom detection rules and simulated attacks, with notes on how each attack was detected (or missed).",
+  date: "2026-10-01",
+  tags: ["Security", "Lab"],
+  status: "in-progress",
+  featured: true,
+  role: "Solo — lab design, detection engineering, attack simulation",
+  stack: ["Wazuh", "VirtualBox", "Ubuntu Server", "Windows 10", "Sysmon", "Kali Linux", "Atomic Red Team"],
+  cover: { src: "/images/projects/home-soc-lab/cover.svg", alt: "Wazuh dashboard with alerts grouped by MITRE ATT&CK tactic" },
+  links: {
+    github: "https://github.com/hamzeayuub-bot/home-soc-lab",
+  },
+};
+
+## Overview
+
+A small but realistic SOC environment running on my own hardware. Endpoints ship logs to a
+Wazuh manager; I attack them from a separate VM and tune rules until the attacks are detected
+with useful context and as few false positives as possible.
+
+<Callout type="warning" title="Work in progress">
+  This lab is actively being built. Sections marked *TODO* will be filled in as I go.
+</Callout>
+
+## Problem
+
+Reading about detection engineering is not the same as doing it. I wanted hands-on practice with
+the full loop a SOC analyst works in: **collect → detect → triage → tune**.
+
+## My role
+
+Everything: network design, VM provisioning, agent deployment, writing custom rules and decoders,
+running attack simulations and documenting results.
+
+## Tech stack
+
+- **Wazuh** (manager, indexer, dashboard) on Ubuntu Server
+- **Windows 10** endpoint with **Sysmon** (SwiftOnSecurity config as a baseline)
+- **Ubuntu** endpoint with auditd
+- **Kali Linux** as the attacker
+- **Atomic Red Team** for repeatable, ATT&CK-mapped simulations
+- Isolated **VirtualBox host-only network** — nothing in the lab can reach my home LAN
+
+## Architecture
+
+<Figure
+  src="/images/projects/home-soc-lab/architecture.svg"
+  alt="Lab network: Kali attacker, Windows and Ubuntu endpoints with Wazuh agents, all on an isolated host-only network reporting to a Wazuh manager."
+  caption="Isolated lab network. TODO: replace with final diagram."
+/>
+
+## Key features
+
+- Centralised log collection from Windows (Sysmon, Security log) and Linux (auth, auditd)
+- File integrity monitoring on sensitive paths
+- Custom rules mapped to MITRE ATT&CK technique IDs
+- A detection matrix tracking which simulations are detected, and how quickly
+
+## Attack simulations & detections
+
+| Technique | Simulation | Detected? | Rule |
+| --- | --- | --- | --- |
+| T1110 Brute force | Hydra against SSH | Yes | Built-in 5712 + custom threshold |
+| T1059.001 PowerShell | Encoded command via Atomic test | Yes | Custom rule on Sysmon EID 1 |
+| T1003.001 LSASS dump | procdump against lsass | TODO | — |
+| T1053.005 Scheduled task | schtasks persistence | TODO | — |
+
+## Challenges & how I solved them
+
+**Alert fatigue on day one.** Default rules fired hundreds of low-value alerts. I raised the
+level on noisy rules and added context-specific exceptions rather than disabling them.
+
+**TODO:** document decoder work for a custom log source.
+
+## Security considerations
+
+- The lab network is host-only; the attacker VM cannot route to the internet or my LAN
+- Malware samples (if any) are handled only inside snapshotted VMs
+- Dashboard credentials are unique and not reused anywhere
+
+## Results
+
+<Figure
+  src="/images/projects/home-soc-lab/cover.svg"
+  alt="Placeholder for an alert screenshot"
+  caption="TODO: add screenshots of real alerts with their ATT&CK mapping."
+/>
+
+## What I learned
+
+TODO — so far: good detections depend more on good telemetry (Sysmon config) than on clever rules.

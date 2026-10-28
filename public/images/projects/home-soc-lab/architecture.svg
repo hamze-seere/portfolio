@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Home SOC lab network">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#5eead4"/></marker></defs><rect width="1200" height="675" fill="#0f1620"/>
+  <rect x="40" y="40" width="1120" height="570" rx="16" fill="none" stroke="#2b394a" stroke-dasharray="8 8"/>
+  <text x="70" y="80" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">host-only network 192.168.56.0/24 — no route to LAN</text>
+  <rect x="90" y="270" width="220" height="110" rx="12" fill="#17202b" stroke="#f87171" stroke-width="2"/>
+  <text x="200" y="321" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Kali Linux</text>
+  <text x="200" y="349" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">attacker</text>
+  <rect x="460" y="140" width="240" height="110" rx="12" fill="#17202b" stroke="#2b394a" stroke-width="2"/>
+  <text x="580" y="191" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Windows 10</text>
+  <text x="580" y="219" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">Sysmon + Wazuh agent</text>
+  <rect x="460" y="400" width="240" height="110" rx="12" fill="#17202b" stroke="#2b394a" stroke-width="2"/>
+  <text x="580" y="451" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Ubuntu</text>
+  <text x="580" y="479" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">auditd + Wazuh agent</text>
+  <rect x="860" y="270" width="250" height="110" rx="12" fill="#17202b" stroke="#5eead4" stroke-width="2"/>
+  <text x="985" y="321" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Wazuh manager</text>
+  <text x="985" y="349" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">indexer · dashboard</text>
+  <line x1="310" y1="310" x2="456" y2="200" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/><line x1="310" y1="340" x2="456" y2="450" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/><line x1="700" y1="195" x2="856" y2="310" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/><line x1="700" y1="455" x2="856" y2="345" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/>
+  <text x="1170" y="650" text-anchor="end" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16">placeholder diagram — replace with your own</text>
+</svg>

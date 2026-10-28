@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="CSP nonce flow">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#5eead4"/></marker></defs><rect width="1200" height="675" fill="#0f1620"/>
+  <rect x="80" y="280" width="240" height="110" rx="12" fill="#17202b" stroke="#2b394a" stroke-width="2"/>
+  <text x="200" y="331" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Request</text>
+  <text x="200" y="359" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">GET /blog/…</text>
+  <rect x="400" y="280" width="260" height="110" rx="12" fill="#17202b" stroke="#5eead4" stroke-width="2"/>
+  <text x="530" y="331" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">proxy.ts</text>
+  <text x="530" y="359" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">nonce = random(128 bits)</text>
+  <rect x="740" y="140" width="360" height="110" rx="12" fill="#17202b" stroke="#2b394a" stroke-width="2"/>
+  <text x="920" y="191" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Render</text>
+  <text x="920" y="219" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">&lt;script nonce=…&gt;</text>
+  <rect x="740" y="420" width="360" height="110" rx="12" fill="#17202b" stroke="#2b394a" stroke-width="2"/>
+  <text x="920" y="471" text-anchor="middle" fill="#e6edf3" font-family="system-ui, sans-serif" font-size="22" font-weight="600">Response header</text>
+  <text x="920" y="499" text-anchor="middle" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">CSP: script-src 'nonce-…'</text>
+  <line x1="320" y1="335" x2="396" y2="335" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/><line x1="660" y1="315" x2="736" y2="200" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/><line x1="660" y1="355" x2="736" y2="470" stroke="#5eead4" stroke-width="2" marker-end="url(#a)"/>
+  <text x="1170" y="650" text-anchor="end" fill="#9aa8b6" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16">placeholder diagram — replace with your own</text>
+</svg>

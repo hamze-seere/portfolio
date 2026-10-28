@@ -1,0 +1,41 @@
+{/*
+  Case-study template. Copy to `<slug>.mdx`, fill in, then register it in content/projects/index.ts.
+  This file itself is NOT registered, so it never appears on the site.
+  `meta` is validated at build time (src/lib/content.ts) — the build fails with a clear message
+  if a field is missing or malformed. "Links" is rendered automatically from meta.links.
+*/}
+
+export const meta = {
+  title: "Project name",
+  summary: "One or two sentences, max 220 characters. Shown on cards and in link previews.",
+  date: "2026-01-31", // YYYY-MM-DD, used for sorting
+  tags: ["Security"], // any of: "Security", "Web", "Lab"
+  status: "live", // "live" | "in-progress" | "archived"
+  featured: false, // up to 4 featured projects appear on the home page
+  role: "Solo — what you did",
+  stack: ["Tech", "Used"],
+  cover: { src: "/images/projects/<slug>/cover.svg", alt: "Describe the image for screen readers" },
+  links: { demo: "https://…", github: "https://github.com/…" }, // both optional
+};
+
+## Overview
+
+## Problem
+
+## My role
+
+## Tech stack
+
+## Architecture
+
+<Figure src="/images/projects/<slug>/architecture.svg" alt="Describe the diagram" caption="Optional caption" />
+
+## Key features
+
+## Challenges & how I solved them
+
+## Security considerations
+
+## Results
+
+## What I learned
