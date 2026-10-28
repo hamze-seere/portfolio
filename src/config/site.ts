@@ -6,14 +6,15 @@
 const fallbackUrl = "https://your-domain.dev";
 
 export const siteConfig = {
-  name: "Your Name", // TODO: replace
-  headline: "Web developer & security engineer",
+  name: "Hamze",
+  headline: "Senior cybersecurity engineer & web designer/developer",
   tagline: "I build secure web apps — and break insecure ones.",
   description:
-    "Portfolio of a Nairobi-based web developer and security engineer: secure full-stack apps, security tooling, SOC lab work and CTF write-ups.",
+    "Portfolio of Hamze, a Nairobi-based senior cybersecurity engineer and web designer/developer working with Next.js, Laravel, PHP and Python: secure web apps, security tooling, SOC lab work and write-ups.",
   location: "Nairobi, Kenya",
   timezone: "EAT (UTC+3)",
-  lookingFor: "Junior AppSec, SOC analyst or full-stack roles — remote or Nairobi-based.", // TODO: adjust
+  lookingFor:
+    "Open to senior cybersecurity and web development roles, freelance projects and collaborations — remote or Nairobi-based.",
   email: "hello@example.com", // TODO: replace
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackUrl).replace(/\/$/, ""),
   locale: "en_KE",

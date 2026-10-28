@@ -2,10 +2,10 @@
 
 ## Personal details: `src/config/site.ts`
 
-- [ ] `name` (currently "Your Name")
+- [x] `name`
 - [ ] `email` (currently `hello@example.com`; also used in security.txt)
 - [ ] `links.linkedin`
-- [ ] `lookingFor`: the roles you're targeting
+- [x] `lookingFor` (review the wording)
 - [ ] Review `headline`, `tagline`, `description`
 - [ ] `securityTxtExpires`: keep it under a year out and set a reminder to renew it
 
@@ -21,7 +21,8 @@
 - [ ] `content/projects/home-soc-lab.mdx`: fill the TODOs as the lab progresses
 - [ ] Replace or delete `phishing-analyzer.mdx` and `secure-notes-api.mdx` (and their lines in `content/projects/index.ts`)
 - [ ] Rewrite or replace the sample blog post (`content/blog/…strict-csp.mdx`)
-- [ ] About page bio and certifications: `src/app/about/page.tsx`
+- [ ] Experience & education timeline: `src/config/experience.ts`
+- [ ] About page bio, "Outside of work" and certifications (+ verification links): `src/app/about/page.tsx`
 - [ ] Home "About" blurb: `src/app/page.tsx`
 - [ ] Skills list: `src/config/skills.ts`
 

@@ -5,7 +5,7 @@ import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/icons";
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border text-sm text-muted">
+    <footer className="mt-16 border-t border-border text-sm text-muted">
       <div className="wrap flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <p>

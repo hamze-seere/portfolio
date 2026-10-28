@@ -1,12 +1,20 @@
 // Skills shown on the home page. Plain tags on purpose: self-rated percentage bars mean nothing.
 export const skillGroups = [
   {
-    title: "Frontend",
-    items: ["TypeScript", "React", "Next.js", "Tailwind CSS", "HTML & accessibility", "MDX"],
+    title: "Frontend & design",
+    items: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Web design & UI",
+      "Responsive layouts",
+      "HTML & accessibility",
+    ],
   },
   {
     title: "Backend",
-    items: ["Node.js", "REST APIs", "PostgreSQL", "Python", "PHP / Laravel", "zod"],
+    items: ["Laravel", "PHP", "Python", "Node.js", "REST APIs", "MySQL / PostgreSQL"],
   },
   {
     title: "Security tools",

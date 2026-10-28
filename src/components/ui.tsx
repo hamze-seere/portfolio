@@ -34,14 +34,23 @@ export function Tag({ children }: { children: ReactNode }) {
   );
 }
 
-export function StatusBadge({ status }: { status: "live" | "in-progress" | "archived" }) {
-  const label = { live: "Live", "in-progress": "In progress", archived: "Archived" }[status];
+export function StatusBadge({
+  status,
+}: {
+  status: "live" | "in-progress" | "archived" | "earned";
+}) {
+  const label = {
+    live: "Live",
+    "in-progress": "In progress",
+    archived: "Archived",
+    earned: "Earned",
+  }[status];
   const tone =
     status === "in-progress"
       ? "text-warn border-warn/40"
-      : status === "live"
-        ? "text-accent border-accent/40"
-        : "text-muted border-border";
+      : status === "archived"
+        ? "text-muted border-border"
+        : "text-accent border-accent/40";
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-xs ${tone}`}

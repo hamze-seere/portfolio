@@ -1,22 +1,24 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { education, experience, type TimelineEntry } from "@/config/experience";
 import { pageMetadata } from "@/lib/seo";
 import { ExternalLink } from "@/components/ExternalLink";
-import { DownloadIcon } from "@/components/icons";
+import { DownloadIcon, LinkedInIcon, MailIcon } from "@/components/icons";
 import { PageHeader, SectionHeading, StatusBadge } from "@/components/ui";
 
 export const metadata = pageMetadata({
   title: "About",
-  description: `About ${siteConfig.name}: background, certifications and resume.`,
+  description: `About ${siteConfig.name}: experience, certifications and resume.`,
   path: "/about",
 });
 
-// TODO: replace with your real certifications and achievements.
+// TODO: replace with your real certifications and achievements. Add `url` with a
+// verification link (Credly, issuer page) wherever one exists — reviewers do click them.
 const achievements: {
   title: string;
   issuer: string;
   date: string;
-  status: "live" | "in-progress";
+  status: "earned" | "in-progress";
   url?: string;
 }[] = [
   {
@@ -35,28 +37,59 @@ const achievements: {
     title: "Top 10% on TryHackMe (placeholder)",
     issuer: "TryHackMe",
     date: "2026",
-    status: "live",
+    status: "earned",
   },
-  { title: "CTF finish (placeholder)", issuer: "Event name", date: "2025", status: "live" },
+  { title: "CTF finish (placeholder)", issuer: "Event name", date: "2025", status: "earned" },
 ];
+
+function Timeline({ entries }: { entries: TimelineEntry[] }) {
+  return (
+    <ol className="relative space-y-10 border-l border-border pl-6">
+      {entries.map((e) => (
+        <li key={`${e.role}-${e.period}`} className="relative">
+          <span
+            className="absolute top-1.5 -left-[29px] size-2.5 rounded-full border-2 border-accent bg-bg"
+            aria-hidden="true"
+          />
+          <p className="font-mono text-xs text-muted">{e.period}</p>
+          <h3 className="mt-1 font-semibold">
+            {e.role} <span className="font-normal text-muted">· {e.org}</span>
+          </h3>
+          <p className="mt-2 text-muted">{e.summary}</p>
+          {e.highlights?.length ? (
+            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted marker:text-accent">
+              {e.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          ) : null}
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 export default function AboutPage() {
   return (
     <div className="wrap">
-      <PageHeader eyebrow="~/about" title="About me">
+      <PageHeader eyebrow="~/about" title={`Hi, I'm ${siteConfig.name}`}>
         <p>
-          {siteConfig.headline} based in {siteConfig.location}.
+          {siteConfig.headline}, based in {siteConfig.location}.
         </p>
       </PageHeader>
 
       <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
         <div className="prose">
-          {/* TODO: replace with your own story. Aim for 3–5 short paragraphs. */}
+          {/* TODO: personalise further. Aim for 3–5 short paragraphs. */}
           <p>
-            I started out building websites and quickly got curious about how they fail. That
-            curiosity turned into a habit: every feature I ship, I also try to break. Today I work
-            across the stack, from Next.js front ends to APIs and the infrastructure underneath,
-            with security as a first-class requirement rather than a final checklist.
+            I&apos;m a senior cybersecurity engineer and web designer/developer. I started out
+            designing and building websites, and quickly got curious about how they fail. That
+            curiosity turned into a habit: every feature I ship, I also try to break.
+          </p>
+          <p>
+            Day to day I work with Next.js, Laravel, PHP and Python, from the interface people see
+            down to the APIs and servers underneath, with security treated as a design requirement
+            rather than a final checklist.
           </p>
           <p>
             On the defensive side I run a home SOC lab built on Wazuh, where I write detection
@@ -65,9 +98,9 @@ export default function AboutPage() {
             up what I learn on the <Link href="/blog">blog</Link>.
           </p>
           <p>
-            I&apos;m looking for {siteConfig.lookingFor.charAt(0).toLowerCase()}
-            {siteConfig.lookingFor.slice(1)} I value teams that review code carefully, write things
-            down and treat security as everyone&apos;s job.
+            I&apos;m always looking to improve, both as an engineer and as a designer, and I value
+            teams that review code carefully, write things down and treat security as
+            everyone&apos;s job.
           </p>
           <h2>Outside of work</h2>
           <p>
@@ -99,6 +132,10 @@ export default function AboutPage() {
                 <dd>{siteConfig.timezone}</dd>
               </div>
               <div className="flex justify-between gap-4">
+                <dt className="text-muted">Stack</dt>
+                <dd className="text-right">Next.js · Laravel · PHP · Python</dd>
+              </div>
+              <div className="flex justify-between gap-4">
                 <dt className="text-muted">GitHub</dt>
                 <dd>
                   <ExternalLink
@@ -109,12 +146,42 @@ export default function AboutPage() {
                   </ExternalLink>
                 </dd>
               </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">LinkedIn</dt>
+                <dd>
+                  <ExternalLink
+                    href={siteConfig.links.linkedin}
+                    className="text-accent hover:underline"
+                  >
+                    Profile
+                  </ExternalLink>
+                </dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">Email</dt>
+                <dd className="min-w-0 truncate">
+                  <a href={`mailto:${siteConfig.email}`} className="text-accent hover:underline">
+                    {siteConfig.email}
+                  </a>
+                </dd>
+              </div>
             </dl>
           </div>
         </aside>
       </div>
 
-      <section aria-labelledby="certs-heading" className="py-20">
+      <section aria-labelledby="experience-heading" className="pt-20">
+        <SectionHeading id="experience-heading" eyebrow="experience" title="Experience" />
+        <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
+          <Timeline entries={experience} />
+          <div>
+            <h3 className="mb-6 font-mono text-sm text-accent">{"// education"}</h3>
+            <Timeline entries={education} />
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="certs-heading" className="pt-20">
         <SectionHeading
           id="certs-heading"
           eyebrow="certifications"
@@ -133,7 +200,7 @@ export default function AboutPage() {
                     a.title
                   )}
                 </h3>
-                {a.status === "in-progress" ? <StatusBadge status="in-progress" /> : null}
+                <StatusBadge status={a.status} />
               </div>
               <p className="mt-1 text-sm text-muted">
                 {a.issuer} · {a.date}
@@ -141,6 +208,30 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section
+        aria-labelledby="cta-heading"
+        className="mt-20 rounded-2xl border border-border bg-surface p-8 sm:p-10"
+      >
+        <h2 id="cta-heading" className="text-2xl font-semibold tracking-tight">
+          Let&apos;s work together
+        </h2>
+        <p className="mt-3 max-w-2xl text-muted">{siteConfig.lookingFor}</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 font-medium text-accent-fg transition-colors hover:bg-accent-strong"
+          >
+            <MailIcon className="size-4" /> Email me
+          </a>
+          <ExternalLink
+            href={siteConfig.links.linkedin}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-2.5 font-medium transition-colors hover:border-accent"
+          >
+            <LinkedInIcon className="size-4" /> Connect on LinkedIn
+          </ExternalLink>
+        </div>
       </section>
     </div>
   );

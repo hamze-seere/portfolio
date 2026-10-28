@@ -98,13 +98,15 @@ export default function HomePage() {
         />
         <div className="max-w-2xl space-y-4 text-lg leading-relaxed text-muted">
           <p>
-            I&apos;m a web developer and security engineer in Nairobi. I like building products
-            end-to-end, and I like even more figuring out how they break: misconfigured headers,
-            missing authorisation checks, the email domain anyone can spoof.
+            I&apos;m Hamze, a senior cybersecurity engineer and web designer/developer in Nairobi. I
+            design and build web apps with Next.js, Laravel, PHP and Python, and I spend just as
+            much time figuring out how they break: misconfigured headers, missing authorisation
+            checks, the email domain anyone can spoof.
           </p>
           <p>
-            Right now I&apos;m sharpening detection engineering in my home SOC lab and building
-            tools like SecureScan that make security checks easy for developers.
+            I&apos;m always looking to improve. Right now that means sharpening detection
+            engineering in my home SOC lab and building tools like SecureScan that make security
+            checks easy for developers.
           </p>
         </div>
         <Link
