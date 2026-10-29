@@ -44,14 +44,14 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
 
   # Optional: scan the deployed site with SecureScan after a push to main.
-  # Uncomment and point it at your action once hamzeayuub-bot/securescan publishes one.
+  # Uncomment and point it at your action once hamze-seere/securescan publishes one.
   # security-scan:
   #   name: SecureScan (deployed URL)
   #   needs: verify
   #   if: github.ref == 'refs/heads/main'
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: hamzeayuub-bot/securescan@v1   # TODO: pin to a release commit SHA
+  #     - uses: hamze-seere/securescan@v1   # TODO: pin to a release commit SHA
   #       with:
   #         url: https://your-domain.dev
   #         fail-below: A

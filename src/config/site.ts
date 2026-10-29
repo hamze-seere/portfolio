@@ -19,7 +19,7 @@ export const siteConfig = {
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackUrl).replace(/\/$/, ""),
   locale: "en_KE",
   links: {
-    github: "https://github.com/hamzeayuub-bot",
+    github: "https://github.com/hamze-seere",
     linkedin: "https://www.linkedin.com/in/your-handle", // TODO: replace
   },
   /** RFC 9116 requires an expiry no more than a year out. Bump it when you review security.txt. */
